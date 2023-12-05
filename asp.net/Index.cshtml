@@ -6,40 +6,45 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<form asp-action="Search" method="get">
+    <p>
+        <b>Search:</b>
+        <input type="text" name="searchString">
+        <b>Release Date:</b>
+        <input type="date" name="startDate">
+        <b>Min Price:</b>
+        <input type="number" name="minPrice" step="0.01">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+</form>
+
+<form asp-action="ToggleAvailability" method="post">
+    <table class="table">
+        <!-- Existing table headers remain unchanged -->
+
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
+                <!-- Add a new th for the checkbox -->
+                <th>
+                    <input type="checkbox" id="selectAll" />
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <!-- Existing table data remains unchanged -->
+
+                    <td>
+                        <!-- Add a new checkbox for each record -->
+                        <input type="checkbox" name="selectedIds" value="@item.Id" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <input type="submit" value="Toggle Availability" class="btn btn-warning" />
+</form>

@@ -27,7 +27,9 @@ namespace SmartphoneManagement.Data
                     {
                         Name = "Phone A",
                         Brand = "Brand X",
-                        Price = 499.99
+                        Price = 499.99,
+                        ReleaseDate = new DateTime(2022, 1, 1),
+                        IsAvailable = true
                     },
                     // Add more seed data as needed
                 );
